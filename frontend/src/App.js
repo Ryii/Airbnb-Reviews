@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Link, useParams } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import AddUserReview from './components/add-user-review'
@@ -26,9 +26,12 @@ function App() {
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to={"/listings"} className="nav-link">
+            <a href="/listings" className="nav-link">
               All Listings
-            </Link>
+            </a>
+            {/* <Link to={"/listings"} className="nav-link">
+              All Listings
+            </Link> */}
           </li>
           <li className="nav-item" >
             { user ? (

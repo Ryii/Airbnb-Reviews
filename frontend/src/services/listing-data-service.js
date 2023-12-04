@@ -1,7 +1,7 @@
 import http from '../http-common'
 
 class ListingDataService {
-  getAll(page = 0) {
+  getAll(page = 1) {
     return http.get(`?page=${page}`);
   }
 
@@ -9,7 +9,7 @@ class ListingDataService {
     return http.get(`/id/${id}`);
   }
 
-  find(query, by = "name", page = 0) {
+  find(query, by = "name", page = 1) {
     return http.get(`?${by}=${query}&page=${page}`);
   }
 

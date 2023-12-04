@@ -3,7 +3,7 @@ import ListingsDAO from "../dao/listingsDAO.js"
 export default class ListingsController {
   static async apiGetListings(req, res, next) {
     const listingsPerPage = req.query.listingsPerPage ? parseInt(req.query.listingsPerPage, 10) : 20
-    const page = req.query.page ? parseInt(req.query.page, 10) : 0
+    const page = req.query.page ? parseInt(req.query.page, 10) : 1
 
     let filters = {}
     if (req.query.property_type) {

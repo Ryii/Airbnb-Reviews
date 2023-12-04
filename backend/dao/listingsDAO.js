@@ -20,7 +20,7 @@ export default class ListingsDAO {
 
   static async getListings({
     filters = null,
-    page = 0,
+    page = 1,
     listingsPerPage = 20,
   } = {}) {
     let query
@@ -44,7 +44,7 @@ export default class ListingsDAO {
       return { listingsList: [], totalNumListings: 0 }
     }
 
-    const displayCursor = cursor.limit(listingsPerPage).skip(listingsPerPage * page)
+    const displayCursor = cursor.limit(listingsPerPage).skip(listingsPerPage * (page - 1))
 
     try {
       const listingsList = await displayCursor.toArray()

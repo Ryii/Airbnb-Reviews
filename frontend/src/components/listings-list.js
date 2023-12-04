@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ListingDataService from "../services/listing-data-service";
 import { Link } from "react-router-dom";
+import Pagination from "./pagination";
+
+let PageSize = 20;
 
 const ListingsList = props => {
   const [listings, setListings] = useState([]);
@@ -11,11 +14,33 @@ const ListingsList = props => {
   const [searchPropertyType, setSearchPropertyType ] = useState("");
   const [propertyTypes, setPropertyTypes] = useState(["All Property Types"]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     retrieveListings();
     retrieveCountries();
     retrievePropertyTypes();
   }, []);
+
+  const changePage = (page) => {
+    ListingDataService.getAll(page)
+      .then(response => {
+        setListings(response.data.listings);
+        setCurrentPage(page);
+        window.scrollTo(0, 0);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  const resetPage = () => {
+    setCurrentPage(1);
+    window.scrollTo(0, 0);
+  }
 
   const onChangeSearchName = e => {
     const searchName = e.target.value;
@@ -37,11 +62,11 @@ const ListingsList = props => {
     setSearchPropertyType(searchPropertyType);
   };
 
-  const retrieveListings = () => {
-    ListingDataService.getAll()
+  const retrieveListings = (currentPage) => {
+    ListingDataService.getAll(currentPage)
       .then(response => {
-        console.log(response.data);
         setListings(response.data.listings);
+        setTotalResults(response.data.total_results);
       })
       .catch(e => {
         console.log(e);
@@ -69,7 +94,7 @@ const ListingsList = props => {
   };
 
   const refreshList = () => {
-    retrieveListings();
+    retrieveListings(currentPage);
   };
 
   const find = (query, by) => {
@@ -77,6 +102,8 @@ const ListingsList = props => {
       .then(response => {
         console.log(response.data);
         setListings(response.data.listings);
+        setTotalResults(response.data.total_results);
+        resetPage();
       })
       .catch(e => {
         console.log(e);
@@ -88,7 +115,7 @@ const ListingsList = props => {
   };
 
   const findByCountry = () => {
-    if (searchCountry == "All Countries") {
+    if (searchCountry === "All Countries") {
       refreshList();
     } else {
       find(searchCountry, "country")
@@ -96,7 +123,7 @@ const ListingsList = props => {
   };
 
   const findByPropertyType = () => {
-    if (searchPropertyType == "All Property Types") {
+    if (searchPropertyType === "All Property Types") {
       refreshList();
     } else {
       find(searchPropertyType, "property_type")
@@ -105,6 +132,7 @@ const ListingsList = props => {
 
   return (
     <div>
+      {isLoading ? "Loading" : ""}
       <div className="row pb-1">
         <div className="input-group col-lg-4">
           <input
@@ -188,7 +216,7 @@ const ListingsList = props => {
                 <div className="card-body">
                   <h5 className="card-title">{listing.name}</h5>
                   <div>
-                    <img src={listing.images.picture_url} alt="Picture Not Available" width="200" height="200"></img>
+                    <img src={listing.images.picture_url} alt="&nbsp;(No Preview)" width="200" height="200"></img>
                   </div>
                   <p className="card-text">
                     <strong>Area: </strong>{address}<br/>
@@ -198,7 +226,7 @@ const ListingsList = props => {
                   <Link to={"/listings/"+listing._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
                     View Reviews
                   </Link>
-                  <a target="_blank" href={"https://www.google.com/maps/?q=" + listing.address.location.coordinates[1] + ","
+                  <a target="_blank" rel="noreferrer" href={"https://www.google.com/maps/?q=" + listing.address.location.coordinates[1] + ","
                     + listing.address.location.coordinates[0]} className="btn btn-primary col-lg-5 mx-1 mb-1">
                       View Map
                   </a>
@@ -208,8 +236,16 @@ const ListingsList = props => {
             </div>
           );
         })}
+      </div>
 
-
+      <div className="d-flex justify-content-center mt-2">
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={totalResults}
+          pageSize={PageSize}
+          onPageChange={page => changePage(page)}
+        />
       </div>
     </div>
   );
