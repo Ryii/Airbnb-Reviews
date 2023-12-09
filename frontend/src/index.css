@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+}
+
+html, body, #root, #root>div {
+  height: 100%
+}

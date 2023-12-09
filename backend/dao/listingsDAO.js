@@ -26,7 +26,7 @@ export default class ListingsDAO {
     let query
     if (filters) {
       if ("name" in filters) {
-        query = { $text : { $search: filters["name"] } }
+        query = { $text : { $search: "\"" + filters["name"] + "\""} }
       } else if ("property_type" in filters) {
         query = { "property_type": { $eq: filters["property_type"] } }
       } else if ("country" in filters) {

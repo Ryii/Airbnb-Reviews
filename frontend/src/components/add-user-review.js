@@ -36,7 +36,6 @@ const AddUserReview = props => {
       ListingDataService.updateUserReview(data)
         .then(response => {
           setSubmitted(true);
-          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -45,7 +44,6 @@ const AddUserReview = props => {
       ListingDataService.createUserReview(data)
         .then(response => {
           setSubmitted(true);
-          console.log(response.data);
         })
         .catch(e => {
           console.log(e);

@@ -57,7 +57,6 @@ export default class UserReviewsController {
     try {
       const userReviewId = req.query.id
       const userId = req.body.user_id
-      console.log(userReviewId)
 
       const userReviewResponse = await UserReviewsDAO.deleteUserReview(
         userReviewId,

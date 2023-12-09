@@ -17,7 +17,6 @@ const Listing = props => {
   const getListing = id => {
     ListingDataService.get(id)
       .then(response => {
-        console.log(response.data);
         setListing(response.data);
       })
       .catch(e => {
