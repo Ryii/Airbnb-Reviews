@@ -11,9 +11,9 @@ const ListingsList = props => {
   const [listings, setListings] = useState([]);
   const [searchName, setSearchName ] = useState("");
   // const [searchZip, setSearchZip ] = useState("");
-  const [searchCountry, setSearchCountry ] = useState("");
+  const [searchCountry, setSearchCountry ] = useState("All Countries");
   const [countries, setCountries] = useState(["All Countries"]);
-  const [searchPropertyType, setSearchPropertyType ] = useState("");
+  const [searchPropertyType, setSearchPropertyType ] = useState("All Property Types");
   const [propertyTypes, setPropertyTypes] = useState(["All Property Types"]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -104,7 +104,7 @@ const ListingsList = props => {
   };
 
   const find = (query, by) => {
-    ListingDataService.find(query, by)
+    ListingDataService.find(query, by, searchName, searchCountry, searchPropertyType)
       .then(response => {
         setListings(response.data.listings);
         setTotalResults(response.data.total_results);
@@ -165,7 +165,7 @@ const ListingsList = props => {
               </form>
             </div>
             <div className="input-group col-lg-4">
-              <select onChange={onChangeSearchCountry} class="px-2">
+              <select onChange={onChangeSearchCountry} style={{paddingLeft: "0.4rem", paddingRight: "0.3rem"}}>
                 {countries.map(country => {
                   return (
                     <option value={country}> {country.substr(0, 25)} </option>
@@ -183,7 +183,7 @@ const ListingsList = props => {
               </div>
             </div>
             <div className="input-group col-lg-4">
-              <select onChange={onChangeSearchPropertyType} class="px-2">
+              <select onChange={onChangeSearchPropertyType} style={{paddingLeft: "0.35rem", paddingRight: "0.2rem"}}>
                 {propertyTypes.map(property_type => {
                   return (
                     <option value={property_type}> {property_type.substr(0, 20)} </option>

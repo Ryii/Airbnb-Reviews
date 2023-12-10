@@ -25,11 +25,11 @@ function App() {
       <nav className="navbar navbar-expand navbar-dark bg-dark"  style={{background: "linear-gradient(to right, #EB2D47, #FF405D)"}}>
         
         <a href="/listings" className="navbar-brand">
-          <img border="0" alt="W3Schools" src="AirbnbLogo.jpg" width="250" height="40" />
+          <img border="0" alt="Logo" src="AirbnbLogo.jpg" width="250" height="40" />
         </a>
         <div className="navbar-nav">
           <li className="nav-item">
-            <a href="/listings" class="my-nav-link">
+            <a href="/listings" className="my-nav-link">
               All Listings
             </a>
             {/* <Link to={"/listings"} className="nav-link">

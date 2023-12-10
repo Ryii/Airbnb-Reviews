@@ -23,8 +23,11 @@ const Login = props => {
   }
 
   return (
-    <div className="submit-form">
+    <div className="submit-form" style={{maxWidth: "400px", margin: "auto"}}>
       <div>
+        <div>
+          <img border="0" alt="Profile" src="LoginProfile.png" width="200" height="200" />
+        </div>
         <div className="form-group">
           <label htmlFor="user">Username</label>
           <input
@@ -51,7 +54,7 @@ const Login = props => {
           />
         </div>
 
-        <button onClick={login} className="btn btn-success">
+        <button onClick={login} className="btn btn-success btn-block btn-large mt-4">
           Login
         </button>
       </div>

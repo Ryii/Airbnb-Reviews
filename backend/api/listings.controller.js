@@ -6,13 +6,9 @@ export default class ListingsController {
     const page = req.query.page ? parseInt(req.query.page, 10) : 1
 
     let filters = {}
-    if (req.query.property_type) {
-      filters.property_type = req.query.property_type
-    } else if (req.query.country) {
-      filters.country = req.query.country
-    } else if (req.query.name) {
-      filters.name = req.query.name
-    }
+    if (req.query.property_type) filters.property_type = req.query.property_type;
+    if (req.query.country) filters.country = req.query.country;
+    if (req.query.name) filters.name = req.query.name;
 
     const { listingsList, totalNumListings } = await ListingsDAO.getListings({
       filters, 

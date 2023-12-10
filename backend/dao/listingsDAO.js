@@ -24,15 +24,14 @@ export default class ListingsDAO {
     listingsPerPage = 20,
   } = {}) {
     let query
+    let queryList = []
     if (filters) {
-      if ("name" in filters) {
-        query = { $text : { $search: "\"" + filters["name"] + "\""} }
-      } else if ("property_type" in filters) {
-        query = { "property_type": { $eq: filters["property_type"] } }
-      } else if ("country" in filters) {
-        query = { "address.country" : { $eq: filters["country"] } }
-      }
+      if ("name" in filters) queryList.push({ $text : { $search: "\"" + filters["name"] + "\""} })
+      if ("property_type" in filters) queryList.push({ "property_type": { $eq: filters["property_type"] } })
+      if ("country" in filters) queryList.push({ "address.country" : { $eq: filters["country"] } })
     }
+
+    if (queryList.length != 0) query = {"$and": queryList}
 
     let cursor
 
