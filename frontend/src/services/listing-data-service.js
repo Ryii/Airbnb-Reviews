@@ -9,16 +9,16 @@ class ListingDataService {
     return http.get(`/id/${id}`);
   }
 
-  find(query, by = "name", searchName, searchCountry, searchPropertyType, page = 1) {
+  find(searchName, searchCountry, searchPropertyType, page = 1) {
     // return http.get(`?${by}=${query}&page=${page}`);
     console.log(searchName, searchCountry, searchPropertyType)
-    if (searchCountry == "All Countries" && searchPropertyType == "All Property Types") {
+    if (searchCountry === "All Countries" && searchPropertyType === "All Property Types") {
       console.log('1');
       return http.get(`?name=${searchName}&page=${page}`);
-    } else if (searchCountry == "All Countries") {
+    } else if (searchCountry === "All Countries") {
       console.log('2');
       return http.get(`?name=${searchName}&property_type=${searchPropertyType}&page=${page}`);
-    } else if (searchPropertyType == "All Property Types") {
+    } else if (searchPropertyType === "All Property Types") {
       console.log('3');
       return http.get(`?name=${searchName}&country=${searchCountry}&page=${page}`);
     } else {

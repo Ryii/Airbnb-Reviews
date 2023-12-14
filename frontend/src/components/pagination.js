@@ -37,22 +37,22 @@ const Pagination = props => {
 
   return (
     <ul className={classnames('pagination-container', { [className]: className })}>
-      <li className={classnames('pagination-item', { disabled: currentPage === 1})} onClick={onPrevious}>
+      <li key={"arrow left"} className={classnames('pagination-item', { disabled: currentPage === 1})} onClick={onPrevious}>
           <div className="arrow left" />
       </li>
       {paginationRange.map(pageNumber => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li key={pageNumber} className="pagination-item dots">&#8230;</li>;
         }
 
         return (
-          <li className={classnames('pagination-item', { selected: pageNumber === currentPage })}
+          <li key={pageNumber} className={classnames('pagination-item', { selected: pageNumber === currentPage })}
               onClick={() => onPageChange(pageNumber)}>
             { pageNumber }
           </li>
         )
       })}
-      <li className={classnames('pagination-item', { disabled: currentPage === lastPage})} onClick={onNext}>
+      <li key={"arrow right"} className={classnames('pagination-item', { disabled: currentPage === lastPage})} onClick={onNext}>
         <div className="arrow right" />
       </li>
     </ul>

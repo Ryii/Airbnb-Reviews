@@ -3,7 +3,6 @@ import ListingDataService from "../services/listing-data-service";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 const AddUserReview = props => {
-
   let { id } = useParams();
   let { state } = useLocation();
 
@@ -36,6 +35,7 @@ const AddUserReview = props => {
       ListingDataService.updateUserReview(data)
         .then(response => {
           setSubmitted(true);
+          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -65,16 +65,20 @@ const AddUserReview = props => {
           </div>
         ) : (
           <div>
+            <div>
+              <h2></h2>
+            </div>
             <div className="form-group">
-              <label htmlFor="description">{ editing ? "Edit" : "Create" } User Review</label>
-              <input
-                type="text"
+              <label htmlFor="description"><h4>{ editing ? "Edit" : "Create" } User Review</h4></label>
+              <textarea
                 className="form-control"
-                id="text"
+                id="review"
+                rows="4"
+                cols="50"
                 required
                 value={userReview}
                 onChange={handleInputChange}
-                name="text"
+                name="review"
               />
             </div>
             <button onClick={saveUserReview} className="btn btn-success">
@@ -86,7 +90,13 @@ const AddUserReview = props => {
 
       ) : (
       <div>
-        Please log in.
+        <p>User must be logged in to post review.</p>
+        <Link to={"/listings/" + id} className="btn btn-danger mr-2">
+          Back
+        </Link>
+        <Link to={"/listings"} className="btn btn-danger">
+          All Listings
+        </Link>
       </div>
       )}
 
