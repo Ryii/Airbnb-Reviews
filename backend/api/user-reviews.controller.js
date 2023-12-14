@@ -3,7 +3,7 @@ import UserReviewsDAO from '../dao/user-reviewsDAO.js'
 export default class UserReviewsController {
   static async apiPostUserReview(req, res, next) {
     try {
-      const listingId = req.body.userReview_id
+      const listingId = req.body.listing_id
       const userReview = req.body.text
       const userInfo = {
         name: req.body.name,

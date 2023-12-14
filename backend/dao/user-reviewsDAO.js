@@ -15,14 +15,14 @@ export default class UserReviewsDAO {
     }
   }
 
-  static async addUserReview(listingId, user, userReview, date) {
+  static async addUserReview(listing_id, user, userReview, date) {
     try {
       const userReviewDoc = {
         name: user.name,
         user_id: user._id,
         date: date,
         text: userReview,
-        listing_id: listingId     // TBD
+        listing_id: listing_id
       }
 
       return await userReviews.insertOne(userReviewDoc)
