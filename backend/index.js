@@ -1,8 +1,32 @@
-import app from './server.js'
+// import app from './server.js'
 import mongodb from 'mongodb'
 import dotenv from 'dotenv'
 import ListingsDAO from './dao/listingsDAO.js'
 import UserReviewsDAO from './dao/user-reviewsDAO.js'
+
+//* Server.js imports
+
+import express from 'express'
+import cors from 'cors'
+import listings from './api/listings.route.js'
+import path from 'path'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const app = express()
+
+app.use(cors())
+app.use(express.json())
+app.use('/api/v1/listings', listings)
+app.use(express.static(path.join(__dirname + "public")))
+app.get('/', (req, res) => {
+  res.json({ message: "Backend API"})
+})
+
+app.use('*', (req, res) => res.status(404).json({ error: "not found :(" }))
+
+//* 
 
 dotenv.config()
 const MongoClient = mongodb.MongoClient
