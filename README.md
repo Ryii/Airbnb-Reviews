@@ -2,7 +2,6 @@
 
 Full-stack platform for [Airbnb Reviews](https://airbnb-reviews-app-d8c3ec079981.herokuapp.com/)!
 
-Camp registration platform for [Focus on Nature](https://www.focusonnature.ca/)!
 
 ## Stack Choices
 
