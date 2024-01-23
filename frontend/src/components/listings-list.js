@@ -204,7 +204,7 @@ const ListingsList = () => {
                             <img src={listing.images.picture_url} alt="&nbsp;(No Preview)" width="200" height="200" style={{borderRadius: "3%"}}></img>
                           </div>
                           <h5 className="card-title">{listing.name}</h5>
-                          <h6 className="text-danger">{symbols[listing.address.country]}{parseInt(listing.price.$numberDecimal)} {currencies[listing.address.country]}</h6>
+                          <h6 className="text-danger">{symbols[listing.address.country]}{parseInt(listing.price.$numberDecimal)} {currencies[listing.address.country]}/night</h6>
                           <p className="card-text pt-1 mb-1">
                             <strong>Area: </strong>{address}<br/>
                             <strong>Property Type: </strong>{listing.property_type}

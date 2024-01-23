@@ -78,7 +78,7 @@ const Listing = props => {
                 </div>
                 <div className="pl-4">
                   <h4 className="mt-2">{listing.name}</h4>
-                  <h5 className="mt-3 text-danger">{symbols[listing.address.country]}{listing.price.$numberDecimal} {currencies[listing.address.country]}</h5>
+                  <h5 className="mt-3 text-danger">{symbols[listing.address.country]}{parseInt(listing.price.$numberDecimal)} {currencies[listing.address.country]}/night</h5>
                   <p className="mt-3">
                     <strong>Area: </strong>{listing.address.suburb}, {listing.address.street}<br/>
                     <strong>Property Type: </strong>{listing.property_type}
@@ -121,7 +121,8 @@ const Listing = props => {
                           <p className="card-text">
                             <strong>User: </strong>{userReview.name}<br/>
                             <strong>Date Posted: </strong>
-                            {months[userReview.date.split('-')[1]]} {userReview.date.split('T')[0].split('-')[2]}, {userReview.date.split('-')[0]}
+                            {/* {months[userReview.date.split('-')[1]]} {userReview.date.split('T')[0].split('-')[2]}, {userReview.date.split('-')[0]} */}
+                            {userReview.date.split(" ")[1]+" "+userReview.date.split(" ")[2] + ", " + userReview.date.split(" ")[3]}
                           </p>
                           {props.user && props.user.id === userReview.user_id &&
                               <div className="row d-flex justify-content-center">
