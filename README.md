@@ -2,7 +2,7 @@
 
 Full-stack platform for adding and reviewing Airbnb locations!
 
-<img src="Homepage.png" width="400" height="210" alt="Homepage Picture">
+<img src="Homepage.png" width="600" height="310" alt="Homepage Picture">
 
 ## Stack Choices
 
